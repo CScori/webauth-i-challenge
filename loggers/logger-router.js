@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const Helper = require('./login-model.js')
-const auths;
+const auths = require('../auths/req-auth.js');
 
 router.get('/', auths, (req, res) => {
     Helper.find()

@@ -1,14 +1,6 @@
-const express = require('express')
-const helmet = require('helmet')
 
-const db;
-const user;
 
-const server = express()
+const server = require('./api/server.js');
 
-server.use(helmet())
-server.use(express.json())
-
-server.get('/', (req, res) => {
-    res.send("Please Scan Your 6@&c0d3")
-})
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`\n** Running on port: ${PORT} **\n`));
