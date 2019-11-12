@@ -5,6 +5,7 @@ const session = require('express-session')
 const KSessStore = require('connect-session storage')
 const enter = require('./a-router.js')
 const logs = require('../loggers/logger-router');
+const kConnect = require('../data/dbconfig.js')
 const server = express()
 
 const sKfig = {
@@ -18,7 +19,7 @@ const sKfig = {
     resave: false,
     saveUninitialized: true,
     store: new KSessStore({
-        knex: knexConnection,
+        knex: kConnect,
         clearInterval: 1000 * 60 * 10,
         tablename: 'log_sesh',
         sidfieldname: "id",
@@ -29,7 +30,7 @@ const sKfig = {
 server.use(express.json())
 server.use(cors())
 server.use(helmet())
-server.session(session())
+server.session(session(sKfig))
 server.use('/api/auth', enter)
 server.use('/api/user', logs)
 
